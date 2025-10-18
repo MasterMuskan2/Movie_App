@@ -1,0 +1,19 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go workspace
+bin/
+vendor/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
