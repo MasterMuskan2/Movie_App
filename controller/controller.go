@@ -37,11 +37,23 @@ func GetMovieByID(w http.ResponseWriter, r *http.Request){
 
 func AddMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+
+	if r.Body ==  nil{
+		json.NewEncoder(w).Encode("Please provide the data!!!")
+	}
+
 	var movie model.Movie
 	_ = json.NewDecoder(r.Body).Decode(&movie)
+
+	if movie.Movie_name == "" {
+		json.NewEncoder(w).Encode("Please provide the name of the movie!!!")
+		return 
+	}
+
 	movie.Id = strconv.Itoa(rand.Intn(100000))
 	database.Movies = append(database.Movies, movie)
-	json.NewEncoder(w).Encode(movie)
+	// json.NewEncoder(w).Encode(movie)
+	json.NewEncoder(w).Encode("The movie has been added to the database!!!")
 }
 
 // Update a movies from the db
@@ -56,7 +68,8 @@ func UpdateMovie(w http.ResponseWriter, r *http.Request){
 			_ = json.NewDecoder(r.Body).Decode(&movie)
 			movie.Id = params["id"]
 			database.Movies = append(database.Movies, movie)
-			json.NewEncoder(w).Encode(movie)
+			// json.NewEncoder(w).Encode(movie)
+			json.NewEncoder(w).Encode("The movie has been updated in the database!!!")
 			return
 		}
 	}
