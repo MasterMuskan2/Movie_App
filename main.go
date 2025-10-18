@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Welcome to my Movie App")
+	fmt.Println("Welcome to my Movie Application!!!")
 	r := router.Init()
 	log.Fatal(http.ListenAndServe(":2000", r))
 }
